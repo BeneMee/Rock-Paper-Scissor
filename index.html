@@ -62,7 +62,7 @@
         let compScore = 0
         let gameEnd = false
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 1000; i++) {
           let playerSelection = prompt("Rock, Paper or Scissor?").toUpperCase();
           let computerSelection = getCompsChoice();
           
@@ -82,8 +82,9 @@
           console.log(playerScore);
           console.log(compScore);
 
-          if (i == 4) {
+          if (playerScore === 5 || compScore === 5) {
             gameEnd = true
+            break
           }
         }
 
