@@ -1,14 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissor</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        
+      function getCompsChoice() {
+        const choices = ["ROCK", "SCISSOR", "PAPER"];
+        const randomIndex = Math.floor(Math.random() * 3);
+        const compsChoice = choices[randomIndex];
+
+        return compsChoice;
+      }
+
+      let playerSelection = "Rock";
+      const computerSelection = getCompsChoice();
+
+      // TOFIX : playerSelection has to be NOT caseSensitive
+      // FIXED : .toUpperCase the users input from prompt.
+      function playRound(playerSelection, computerSelection) {
+        if (playerSelection == computerSelection) {
+          return "Tie!";
+
+        } else if (playerSelection == "ROCK" && computerSelection == "PAPER") {
+          return "You loose! Paper beats Rock.";
+
+        } else if (playerSelection == "PAPER" && computerSelection == "ROCK") {
+          return "You won! Paper beats Rock.";
+        } else if (
+          playerSelection == "PAPER" &&
+          computerSelection == "SCISSOR"
+        ) {
+          return "You loose! Scissor beats Paper.";
+
+        } else if (
+          playerSelection == "SCISSOR" &&
+          computerSelection == "PAPER"
+        ) {
+          return "You won! Scissor beats Paper.";
+
+        } else if (
+          playerSelection == "SCISSOR" &&
+          computerSelection == "ROCK"
+        ) {
+          return "You loose! Rock beats Scissor.";
+
+        } else if (playerSelection == "ROCK" &&
+          computerSelection == "SCISSOR") {
+            return "You won! Rock beats Scissor."
+          }
+       
+      }
+
+
+
+      function game() {
+        let playerScore = 0
+        let compScore = 0
+        let gameEnd = false
+
+        for (let i = 0; i < 5; i++) {
+          let playerSelection = prompt("Rock, Paper or Scissor?").toUpperCase();
+          let computerSelection = getCompsChoice();
+          
+
+          playRound(playerSelection, computerSelection);
+
+          if (playRound(playerSelection, computerSelection) == "You loose! Paper beats Rock." || playRound(playerSelection, computerSelection) == "You loose! Scissor beats Paper." || playRound(playerSelection, computerSelection) == "You loose! Rock beats Scissor.") {
+            compScore ++;
+          }
+          else if (playRound(playerSelection, computerSelection) == "You won! Paper beats Rock." || playRound(playerSelection, computerSelection) == "You won! Scissor beats Paper." || playRound(playerSelection, computerSelection) == "You won! Rock beats Scissor." ) {
+            playerScore ++;
+
+          }  
+          
+
+          console.log(playRound(playerSelection , computerSelection));
+          console.log(playerScore);
+          console.log(compScore);
+
+          if (i == 4) {
+            gameEnd = true
+          }
+        }
+
+        if (gameEnd) {
+            if (playerScore > compScore) {
+                console.log("You WON the Game!!!");
+            }
+            else if (playerScore < compScore) {
+                console.log("You LOST the Game!");
+            }
+            else {
+                console.log("It's a TIE!");
+            }
+        }
+
+      }
+
+      game();
     </script>
-</body>
+  </body>
 </html>
