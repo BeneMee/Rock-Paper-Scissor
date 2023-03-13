@@ -2,9 +2,10 @@ function getCompsChoice() {
   const choices = ["Rock", "Paper", "Scissor"];
   const randomIndex = Math.floor(Math.random() * 3);
   const compsChoice = choices[randomIndex];
-
   return compsChoice;
 }
+
+
 
 const btnRock = document.querySelector("#rock");
 const btnPaper = document.querySelector("#paper");
@@ -13,15 +14,32 @@ const allBtns = document.querySelectorAll("button");
 const scoreboard = document.querySelector("#scoreboard");
 const playerScore = document.querySelector("#playerScore");
 const computerScore = document.querySelector("#computerScore");
+const choicesDiv = document.querySelector("#choices");
 
 playerScore.innerHTML = 0;
 computerScore.innerHTML = 0;
 
 allBtns.forEach((item) => {
   item.addEventListener("click", (event) => {
+
+    checkChoicesDiv ();
+
     let playerSelection = "";
     let computerSelection = getCompsChoice();
+
     playerSelection += item.textContent;
+
+    let choicePlayerEl = document.createElement("p");
+    let choiceCompEl = document.createElement("p");
+
+    choicesDiv.append(choicePlayerEl);
+    choicesDiv.append(choiceCompEl);
+
+    choicePlayerEl.textContent = `You: ${playerSelection}`;
+    choiceCompEl.textContent = `Comp: ${computerSelection}`;
+
+
+
     if (playerSelection === computerSelection) {
       const message = document.createElement("p");
       scoreboard.append(message);
@@ -77,6 +95,12 @@ function checkScore() {
     scoreboard.innerHTML = "";
   } 
   
+}
+
+function checkChoicesDiv () {
+  if (choicesDiv.firstChild) {
+    choicesDiv.innerHTML = "";
+  }
 }
 
 
